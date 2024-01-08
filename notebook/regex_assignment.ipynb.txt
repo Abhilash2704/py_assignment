@@ -1,0 +1,1194 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "f6230434",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "****************************************************************************************************\n",
+      "                                           woww Python\n",
+      "****************************************************************************************************\n"
+     ]
+    }
+   ],
+   "source": [
+    "print('*'*100)\n",
+    "print('                                           woww Python')\n",
+    "print(\"*\"*100)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "553967b2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import regex as re\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "cc62ca7a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Python:Exercises::PHP:exercises\n"
+     ]
+    }
+   ],
+   "source": [
+    "sub = re.sub(\"\\s+|,|\\.\",\":\",\"Python Exercises, PHP exercises\")\n",
+    "print(sub)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "a616e070",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "                SUMMARY\n",
+      "0         hello, world!\n",
+      "1             XXXX test\n",
+      "2  123four,five:;six...\n"
+     ]
+    }
+   ],
+   "source": [
+    "df = pd.DataFrame({'SUMMARY':['hello, world!','XXXX test','123four,five:;six...']})\n",
+    "print(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "150af418",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0         hello  world \n",
+      "1                  test\n",
+      "2     four five  six   \n",
+      "Name: SUMMARY, dtype: object\n"
+     ]
+    }
+   ],
+   "source": [
+    "df_sub = df['SUMMARY'].str.replace(\"\\W|XXXX|[0-9]+\",\" \",regex = True)\n",
+    "print(df_sub)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "45818f45",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['This', 'easy', 'output']\n"
+     ]
+    }
+   ],
+   "source": [
+    "find_4 = re.compile(\"\\w{4,}\")\n",
+    "\n",
+    "reg_pat = find_4.findall(\"This is an easy output\")\n",
+    "print(reg_pat)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "04798d7b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['This', 'easy', 'outpu', 'Howev', 'can', 'made', 'more', 'and', 'more', 'chall', 'engin', 'reall', 'does', 'make', 'think', 'lot']\n"
+     ]
+    }
+   ],
+   "source": [
+    "find_456 = re.compile(\"\\w{3,5}\")\n",
+    "\n",
+    "reg_pat2 = find_456.findall(\"This is an easy output. However it can be made more and more challenging. It really does make me think a lot.\")\n",
+    "print(reg_pat2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "786b2329",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "example.com\n",
+      "hr@fliprobo.com\n",
+      "github.com\n",
+      "Hello Data Science world\n",
+      "Data Scientist\n"
+     ]
+    }
+   ],
+   "source": [
+    "sub_brac = re.compile(\"\\(|\\)\")\n",
+    "listofString = [\"example(.com)\",\"hr@fliprobo(.com)\",\"github(.com)\",\"Hello (Data Science world)\",\"Data (Scientist)\"]\n",
+    "for string in listofString:\n",
+    "    reg_pat3 = sub_brac.sub(\"\",string)\n",
+    "    print(reg_pat3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "67f65cfb",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "example\n",
+      "hr@fliprobo\n",
+      "github\n",
+      "Hello \n",
+      "Data \n"
+     ]
+    }
+   ],
+   "source": [
+    "listofString = [\"example(.com)\",\"hr@fliprobo(.com)\",\"github(.com)\",\"Hello (Data Science world)\",\"Data (Scientist)\"]\n",
+    "for string in listofString:\n",
+    "    reg_pat3 = re.sub(r\"\\([^)]*\\)\",\"\",string)\n",
+    "    print(reg_pat3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "d1d826e6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['', 'Importance', 'Of', 'Regular', 'Expressions', 'In', 'Python']\n"
+     ]
+    }
+   ],
+   "source": [
+    "re_split = re.split(\"(?=[A-Z])\",\"ImportanceOfRegularExpressionsInPython\")\n",
+    "print(re_split)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "029b3dcc",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "RegularExpression 1IsAn 2ImportantTopic 3InPython\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(re.sub(\"(?=\\d)\",\" \",\"RegularExpression1IsAn2ImportantTopic3InPython\"))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "180e8ddf",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " Regular Expression 1 Is An 2 Important Topic 3 In Python\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(re.sub(\"(?=\\d)|(?=[A-Z])\",\" \",\"RegularExpression1IsAn2ImportantTopic3InPython\"))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "3f1dc63d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv(\"https://raw.githubusercontent.com/dsrscientist/DSData/master/happiness_score_dataset.csv\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "2d9fba10",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Country</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>Happiness Rank</th>\n",
+       "      <th>Happiness Score</th>\n",
+       "      <th>Standard Error</th>\n",
+       "      <th>Economy (GDP per Capita)</th>\n",
+       "      <th>Family</th>\n",
+       "      <th>Health (Life Expectancy)</th>\n",
+       "      <th>Freedom</th>\n",
+       "      <th>Trust (Government Corruption)</th>\n",
+       "      <th>Generosity</th>\n",
+       "      <th>Dystopia Residual</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Switzerland</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>1</td>\n",
+       "      <td>7.587</td>\n",
+       "      <td>0.03411</td>\n",
+       "      <td>1.39651</td>\n",
+       "      <td>1.34951</td>\n",
+       "      <td>0.94143</td>\n",
+       "      <td>0.66557</td>\n",
+       "      <td>0.41978</td>\n",
+       "      <td>0.29678</td>\n",
+       "      <td>2.51738</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Iceland</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>2</td>\n",
+       "      <td>7.561</td>\n",
+       "      <td>0.04884</td>\n",
+       "      <td>1.30232</td>\n",
+       "      <td>1.40223</td>\n",
+       "      <td>0.94784</td>\n",
+       "      <td>0.62877</td>\n",
+       "      <td>0.14145</td>\n",
+       "      <td>0.43630</td>\n",
+       "      <td>2.70201</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Denmark</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>3</td>\n",
+       "      <td>7.527</td>\n",
+       "      <td>0.03328</td>\n",
+       "      <td>1.32548</td>\n",
+       "      <td>1.36058</td>\n",
+       "      <td>0.87464</td>\n",
+       "      <td>0.64938</td>\n",
+       "      <td>0.48357</td>\n",
+       "      <td>0.34139</td>\n",
+       "      <td>2.49204</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Norway</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>4</td>\n",
+       "      <td>7.522</td>\n",
+       "      <td>0.03880</td>\n",
+       "      <td>1.45900</td>\n",
+       "      <td>1.33095</td>\n",
+       "      <td>0.88521</td>\n",
+       "      <td>0.66973</td>\n",
+       "      <td>0.36503</td>\n",
+       "      <td>0.34699</td>\n",
+       "      <td>2.46531</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Canada</td>\n",
+       "      <td>North America</td>\n",
+       "      <td>5</td>\n",
+       "      <td>7.427</td>\n",
+       "      <td>0.03553</td>\n",
+       "      <td>1.32629</td>\n",
+       "      <td>1.32261</td>\n",
+       "      <td>0.90563</td>\n",
+       "      <td>0.63297</td>\n",
+       "      <td>0.32957</td>\n",
+       "      <td>0.45811</td>\n",
+       "      <td>2.45176</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       Country          Region  Happiness Rank  Happiness Score  \\\n",
+       "0  Switzerland  Western Europe               1            7.587   \n",
+       "1      Iceland  Western Europe               2            7.561   \n",
+       "2      Denmark  Western Europe               3            7.527   \n",
+       "3       Norway  Western Europe               4            7.522   \n",
+       "4       Canada   North America               5            7.427   \n",
+       "\n",
+       "   Standard Error  Economy (GDP per Capita)   Family  \\\n",
+       "0         0.03411                   1.39651  1.34951   \n",
+       "1         0.04884                   1.30232  1.40223   \n",
+       "2         0.03328                   1.32548  1.36058   \n",
+       "3         0.03880                   1.45900  1.33095   \n",
+       "4         0.03553                   1.32629  1.32261   \n",
+       "\n",
+       "   Health (Life Expectancy)  Freedom  Trust (Government Corruption)  \\\n",
+       "0                   0.94143  0.66557                        0.41978   \n",
+       "1                   0.94784  0.62877                        0.14145   \n",
+       "2                   0.87464  0.64938                        0.48357   \n",
+       "3                   0.88521  0.66973                        0.36503   \n",
+       "4                   0.90563  0.63297                        0.32957   \n",
+       "\n",
+       "   Generosity  Dystopia Residual  \n",
+       "0     0.29678            2.51738  \n",
+       "1     0.43630            2.70201  \n",
+       "2     0.34139            2.49204  \n",
+       "3     0.34699            2.46531  \n",
+       "4     0.45811            2.45176  "
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "2936af35",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 158 entries, 0 to 157\n",
+      "Data columns (total 12 columns):\n",
+      " #   Column                         Non-Null Count  Dtype  \n",
+      "---  ------                         --------------  -----  \n",
+      " 0   Country                        158 non-null    object \n",
+      " 1   Region                         158 non-null    object \n",
+      " 2   Happiness Rank                 158 non-null    int64  \n",
+      " 3   Happiness Score                158 non-null    float64\n",
+      " 4   Standard Error                 158 non-null    float64\n",
+      " 5   Economy (GDP per Capita)       158 non-null    float64\n",
+      " 6   Family                         158 non-null    float64\n",
+      " 7   Health (Life Expectancy)       158 non-null    float64\n",
+      " 8   Freedom                        158 non-null    float64\n",
+      " 9   Trust (Government Corruption)  158 non-null    float64\n",
+      " 10  Generosity                     158 non-null    float64\n",
+      " 11  Dystopia Residual              158 non-null    float64\n",
+      "dtypes: float64(9), int64(1), object(2)\n",
+      "memory usage: 14.9+ KB\n"
+     ]
+    }
+   ],
+   "source": [
+    "df.info()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "350b5be5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Country</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>Happiness Rank</th>\n",
+       "      <th>Happiness Score</th>\n",
+       "      <th>Standard Error</th>\n",
+       "      <th>Economy (GDP per Capita)</th>\n",
+       "      <th>Family</th>\n",
+       "      <th>Health (Life Expectancy)</th>\n",
+       "      <th>Freedom</th>\n",
+       "      <th>Trust (Government Corruption)</th>\n",
+       "      <th>Generosity</th>\n",
+       "      <th>Dystopia Residual</th>\n",
+       "      <th>first_five_letters</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Switzerland</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>1</td>\n",
+       "      <td>7.587</td>\n",
+       "      <td>0.03411</td>\n",
+       "      <td>1.39651</td>\n",
+       "      <td>1.34951</td>\n",
+       "      <td>0.94143</td>\n",
+       "      <td>0.66557</td>\n",
+       "      <td>0.41978</td>\n",
+       "      <td>0.29678</td>\n",
+       "      <td>2.51738</td>\n",
+       "      <td>Switze</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Iceland</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>2</td>\n",
+       "      <td>7.561</td>\n",
+       "      <td>0.04884</td>\n",
+       "      <td>1.30232</td>\n",
+       "      <td>1.40223</td>\n",
+       "      <td>0.94784</td>\n",
+       "      <td>0.62877</td>\n",
+       "      <td>0.14145</td>\n",
+       "      <td>0.43630</td>\n",
+       "      <td>2.70201</td>\n",
+       "      <td>Icelan</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Denmark</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>3</td>\n",
+       "      <td>7.527</td>\n",
+       "      <td>0.03328</td>\n",
+       "      <td>1.32548</td>\n",
+       "      <td>1.36058</td>\n",
+       "      <td>0.87464</td>\n",
+       "      <td>0.64938</td>\n",
+       "      <td>0.48357</td>\n",
+       "      <td>0.34139</td>\n",
+       "      <td>2.49204</td>\n",
+       "      <td>Denmar</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Norway</td>\n",
+       "      <td>Western Europe</td>\n",
+       "      <td>4</td>\n",
+       "      <td>7.522</td>\n",
+       "      <td>0.03880</td>\n",
+       "      <td>1.45900</td>\n",
+       "      <td>1.33095</td>\n",
+       "      <td>0.88521</td>\n",
+       "      <td>0.66973</td>\n",
+       "      <td>0.36503</td>\n",
+       "      <td>0.34699</td>\n",
+       "      <td>2.46531</td>\n",
+       "      <td>Norway</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Canada</td>\n",
+       "      <td>North America</td>\n",
+       "      <td>5</td>\n",
+       "      <td>7.427</td>\n",
+       "      <td>0.03553</td>\n",
+       "      <td>1.32629</td>\n",
+       "      <td>1.32261</td>\n",
+       "      <td>0.90563</td>\n",
+       "      <td>0.63297</td>\n",
+       "      <td>0.32957</td>\n",
+       "      <td>0.45811</td>\n",
+       "      <td>2.45176</td>\n",
+       "      <td>Canada</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>153</th>\n",
+       "      <td>Rwanda</td>\n",
+       "      <td>Sub-Saharan Africa</td>\n",
+       "      <td>154</td>\n",
+       "      <td>3.465</td>\n",
+       "      <td>0.03464</td>\n",
+       "      <td>0.22208</td>\n",
+       "      <td>0.77370</td>\n",
+       "      <td>0.42864</td>\n",
+       "      <td>0.59201</td>\n",
+       "      <td>0.55191</td>\n",
+       "      <td>0.22628</td>\n",
+       "      <td>0.67042</td>\n",
+       "      <td>Rwanda</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>154</th>\n",
+       "      <td>Benin</td>\n",
+       "      <td>Sub-Saharan Africa</td>\n",
+       "      <td>155</td>\n",
+       "      <td>3.340</td>\n",
+       "      <td>0.03656</td>\n",
+       "      <td>0.28665</td>\n",
+       "      <td>0.35386</td>\n",
+       "      <td>0.31910</td>\n",
+       "      <td>0.48450</td>\n",
+       "      <td>0.08010</td>\n",
+       "      <td>0.18260</td>\n",
+       "      <td>1.63328</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>155</th>\n",
+       "      <td>Syria</td>\n",
+       "      <td>Middle East and Northern Africa</td>\n",
+       "      <td>156</td>\n",
+       "      <td>3.006</td>\n",
+       "      <td>0.05015</td>\n",
+       "      <td>0.66320</td>\n",
+       "      <td>0.47489</td>\n",
+       "      <td>0.72193</td>\n",
+       "      <td>0.15684</td>\n",
+       "      <td>0.18906</td>\n",
+       "      <td>0.47179</td>\n",
+       "      <td>0.32858</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>156</th>\n",
+       "      <td>Burundi</td>\n",
+       "      <td>Sub-Saharan Africa</td>\n",
+       "      <td>157</td>\n",
+       "      <td>2.905</td>\n",
+       "      <td>0.08658</td>\n",
+       "      <td>0.01530</td>\n",
+       "      <td>0.41587</td>\n",
+       "      <td>0.22396</td>\n",
+       "      <td>0.11850</td>\n",
+       "      <td>0.10062</td>\n",
+       "      <td>0.19727</td>\n",
+       "      <td>1.83302</td>\n",
+       "      <td>Burund</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>157</th>\n",
+       "      <td>Togo</td>\n",
+       "      <td>Sub-Saharan Africa</td>\n",
+       "      <td>158</td>\n",
+       "      <td>2.839</td>\n",
+       "      <td>0.06727</td>\n",
+       "      <td>0.20868</td>\n",
+       "      <td>0.13995</td>\n",
+       "      <td>0.28443</td>\n",
+       "      <td>0.36453</td>\n",
+       "      <td>0.10731</td>\n",
+       "      <td>0.16681</td>\n",
+       "      <td>1.56726</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>158 rows × 13 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "         Country                           Region  Happiness Rank  \\\n",
+       "0    Switzerland                   Western Europe               1   \n",
+       "1        Iceland                   Western Europe               2   \n",
+       "2        Denmark                   Western Europe               3   \n",
+       "3         Norway                   Western Europe               4   \n",
+       "4         Canada                    North America               5   \n",
+       "..           ...                              ...             ...   \n",
+       "153       Rwanda               Sub-Saharan Africa             154   \n",
+       "154        Benin               Sub-Saharan Africa             155   \n",
+       "155        Syria  Middle East and Northern Africa             156   \n",
+       "156      Burundi               Sub-Saharan Africa             157   \n",
+       "157         Togo               Sub-Saharan Africa             158   \n",
+       "\n",
+       "     Happiness Score  Standard Error  Economy (GDP per Capita)   Family  \\\n",
+       "0              7.587         0.03411                   1.39651  1.34951   \n",
+       "1              7.561         0.04884                   1.30232  1.40223   \n",
+       "2              7.527         0.03328                   1.32548  1.36058   \n",
+       "3              7.522         0.03880                   1.45900  1.33095   \n",
+       "4              7.427         0.03553                   1.32629  1.32261   \n",
+       "..               ...             ...                       ...      ...   \n",
+       "153            3.465         0.03464                   0.22208  0.77370   \n",
+       "154            3.340         0.03656                   0.28665  0.35386   \n",
+       "155            3.006         0.05015                   0.66320  0.47489   \n",
+       "156            2.905         0.08658                   0.01530  0.41587   \n",
+       "157            2.839         0.06727                   0.20868  0.13995   \n",
+       "\n",
+       "     Health (Life Expectancy)  Freedom  Trust (Government Corruption)  \\\n",
+       "0                     0.94143  0.66557                        0.41978   \n",
+       "1                     0.94784  0.62877                        0.14145   \n",
+       "2                     0.87464  0.64938                        0.48357   \n",
+       "3                     0.88521  0.66973                        0.36503   \n",
+       "4                     0.90563  0.63297                        0.32957   \n",
+       "..                        ...      ...                            ...   \n",
+       "153                   0.42864  0.59201                        0.55191   \n",
+       "154                   0.31910  0.48450                        0.08010   \n",
+       "155                   0.72193  0.15684                        0.18906   \n",
+       "156                   0.22396  0.11850                        0.10062   \n",
+       "157                   0.28443  0.36453                        0.10731   \n",
+       "\n",
+       "     Generosity  Dystopia Residual first_five_letters  \n",
+       "0       0.29678            2.51738             Switze  \n",
+       "1       0.43630            2.70201             Icelan  \n",
+       "2       0.34139            2.49204             Denmar  \n",
+       "3       0.34699            2.46531             Norway  \n",
+       "4       0.45811            2.45176             Canada  \n",
+       "..          ...                ...                ...  \n",
+       "153     0.22628            0.67042             Rwanda  \n",
+       "154     0.18260            1.63328                NaN  \n",
+       "155     0.47179            0.32858                NaN  \n",
+       "156     0.19727            1.83302             Burund  \n",
+       "157     0.16681            1.56726                NaN  \n",
+       "\n",
+       "[158 rows x 13 columns]"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['first_five_letters'] = df['Country'].str.extract(r\"(\\w{6})\",expand = True)\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "d5db1700",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['thisistosplit', '3a4string', '3withanumber', '3init']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(re.split(\"(?=3)\",\"thisistosplit3a4string3withanumber3init\"))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "bac9d4f3",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "fox\n",
+      "dog\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str = \"The quick Brown fox jumps over the lazy dog\"\n",
+    "result = re.finditer(r\"fox|dog\",tar_str)\n",
+    "\n",
+    "for match in result:\n",
+    "    print(match.group())\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "15b89b4d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "fox\n",
+      "<regex.Match object; span=(16, 19), match='fox'>\n",
+      "dog\n",
+      "<regex.Match object; span=(40, 43), match='dog'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str = \"The quick Brown fox jumps over the lazy dog\"\n",
+    "result = re.finditer(r\"fox|dog\",tar_str)\n",
+    "\n",
+    "for match in result:\n",
+    "    print(match.group())\n",
+    "    print(match)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "031c31c5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['01.12', '0132.02', '2.31', '145.8', '3.01', '27.25', '0.25']"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "pat4 = re.compile(\"([0-9]+\\.[0-9]{0,2})\")\n",
+    "res = pat4.findall(\"01.12 0132.023 2.31875 145.8 3.01 27.25 0.25\")\n",
+    "res"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "e7698de2",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2\n",
+      "<regex.Match object; span=(4, 5), match='2'>\n",
+      "34\n",
+      "<regex.Match object; span=(17, 19), match='34'>\n",
+      "0\n",
+      "<regex.Match object; span=(29, 30), match='0'>\n",
+      "56\n",
+      "<regex.Match object; span=(35, 37), match='56'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str = \"The 2quick Brown 34fox jumps 0over 56the lazy dog\"\n",
+    "result = re.finditer(r\"\\d+\",tar_str)\n",
+    "\n",
+    "for match in result:\n",
+    "    print(match.group())\n",
+    "    print(match)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "0bb183c7",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "950\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str = \"My marks in each semester are: 947, 896, 926, 524, 734, 950, 642\"\n",
+    "result = re.findall(r\"\\d+\",tar_str)\n",
+    "\n",
+    "print(max(result))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "0a235b25",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " Regular Expression1 Is An2 Important Topic3 In Python\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(re.sub(\"(?=[A-Z])\",\" \",\"RegularExpression1IsAn2ImportantTopic3InPython\"))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "97d1d391",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['#Doltiwal', '#xyzabc', '#Demonetization']\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str = \"\"\"\"RT @kapil_kausik: #Doltiwal I mean #xyzabc is \"hurt\" by #Demonetization as the same has rendered USELESS <ed><U+00A0><U+00BD><ed><U+00B1><U+0089> \"acquired funds\" No wo\"\"\"\"\"\n",
+    "pattern = \"(#\\w+)\"\n",
+    "print(re.findall(pattern,tar_str))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "0f0f07f5",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "@Jags123456 Bharat band on 28??<ed><ed>Those who  are protesting #demonetization  are all different party leaders\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str1 = \"@Jags123456 Bharat band on 28??<ed><U+00A0><U+00BD><ed><U+00B8><U+0082>Those who  are protesting #demonetization  are all different party leaders\"\n",
+    "pattern = \"(<U\\+\\w+>)\"\n",
+    "print(re.sub(pattern,\"\",tar_str1))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "043ae6fd",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['12-09-1992', '15-12-1999']\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str2 = \"Ron was born on 12-09-1992 and he was admitted to school 15-12-1999.\"\n",
+    "pattern = \"(\\d\\d-\\d\\d-\\d\\d\\d\\d)\"\n",
+    "print(re.findall(pattern,tar_str2))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "cbb40dfa",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " following example creates  ArrayList  a capacity   elements. 4 elements   added   ArrayList   ArrayList  trimmed accordingly.\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str4 = \"The following example creates an ArrayList with a capacity of 50 elements. 4 elements are then added to the ArrayList and the ArrayList is trimmed accordingly.\"\n",
+    "pattern = re.compile(r'\\b[^ ]{2,4}\\b')            \n",
+    "print(pattern.sub('',tar_str4))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "41b99e7a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'exercises'"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "result = re.search(\"exercises\",\"Python exercises, PHP exercises, C# exercises\")\n",
+    "result.group()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "cd52ded8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "exercises\n",
+      "<regex.Match object; span=(7, 16), match='exercises'>\n",
+      "exercises\n",
+      "<regex.Match object; span=(22, 31), match='exercises'>\n",
+      "exercises\n",
+      "<regex.Match object; span=(36, 45), match='exercises'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str11 = \"Python exercises, PHP exercises, C# exercises\"\n",
+    "result = re.finditer(\"exercises\",tar_str11)\n",
+    "\n",
+    "for msg in result:\n",
+    "    print(msg.group())\n",
+    "    print(msg)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "19540e55",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1\n",
+      "<regex.Match object; span=(16, 17), match='1'>\n",
+      "2\n",
+      "<regex.Match object; span=(27, 28), match='2'>\n",
+      "3\n",
+      "<regex.Match object; span=(35, 36), match='3'>\n",
+      "4000\n",
+      "<regex.Match object; span=(43, 47), match='4000'>\n"
+     ]
+    }
+   ],
+   "source": [
+    "tar_str12 = \"Python exercise 1 of regex 2 is so 3 tough 4000\"\n",
+    "result = re.finditer(\"\\d+\",tar_str12)\n",
+    "\n",
+    "for match in result:\n",
+    "    print(match.group())\n",
+    "    print(match)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "c2ff6cb1",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['This', 'algo', 'Gives', 'any', 'word', 'as', 'output', 'including', 'underscores', '_']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(re.findall(\"\\w+\",\"This algo Gives any word as output including underscores _\"))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "c1fb289f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['This', 'Algo', 'Us', 'Words', 'Starting', 'Capital', 'Letters']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(re.findall(r\"\\b[A-Z][a-z]+\",\"This Algo will give Us an output of Words Starting with Capital Letters\")) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "id": "c896c8f3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<regex.Match object; span=(21, 29), match='value123'>"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "string = \"This program gives a value123 as output which is alphanumeric@45 at the end\"\n",
+    "result = re.search(r\"\\b\\w+[0-9]+\",string)\n",
+    "result"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "id": "e9dc350a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'783.2.14.2874'"
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "string = \"783.002.014.0002874\"\n",
+    "result = re.sub(\"\\.[0]*\",'.',string)\n",
+    "result"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "id": "ed199fca",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "05-01-2023\n"
+     ]
+    }
+   ],
+   "source": [
+    "result = re.sub(r'(\\d{4})-(\\d{1,2})-(\\d{1,2})','\\\\3-\\\\2-\\\\1',\"2023-01-05\")\n",
+    "print(result)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "12ff1186",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
